@@ -20,7 +20,7 @@ namespace Book_Store.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Orders
         public async Task<IActionResult> Index()
         {

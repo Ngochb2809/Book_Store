@@ -6,6 +6,18 @@
 
 <h1>Details</h1>
 
+<style>
+    dl{
+    border:1px solid black;
+}
+dt{
+    border:1px solid black;
+}
+đ{
+    border:1px solid black;
+}
+</style>
+
 <div>
     <h4>Order</h4>
     <hr />
@@ -29,13 +41,13 @@
             @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Book)
+            @Html.DisplayNameFor(model => model.BookId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Book.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.UserId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.User.Id)
@@ -43,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

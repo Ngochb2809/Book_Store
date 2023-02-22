@@ -28,6 +28,19 @@
         });
     });
 </script>
+<style>
+    table {
+        border: 1px solid black;
+    }
+
+    th {
+        border: 1px solid black;
+    }
+
+    td {
+        border: 1px solid black;
+    }
+</style>
 <div class="list-cart">
     <table class="cart" border="1">
         <tr>
@@ -46,7 +59,7 @@
             {
                 string txt_class = "quantity_" + item.Book.Id;
                 STT++;
-                
+
                 decimal total = item.Book.Price * item.Quantity;
                 //caloriesBurned = Convert.ToInt32(Decimal.Multiply(maleusage, textBoxInt));
                 <tr>
@@ -64,4 +77,3 @@
 
     </table>
 </div>
-

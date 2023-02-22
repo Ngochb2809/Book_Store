@@ -7,19 +7,22 @@
 <h1>Book List</h1>
 
 <p>
-    <a asp-action="Create"class="btn btn-lg btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-lg btn-primary">Create New</a>
 </p>
 <style>
-    table{
-    border:1px solid black;
-}
-th{
-    border:1px solid black;
-}
-td{
-    border:1px solid black;
-}
-class{
+    table {
+        border: 1px solid black;
+    }
+
+    th {
+        border: 1px solid black;
+    }
+
+    td {
+        border: 1px solid black;
+    }
+
+    class {
         height: 20px;
         width: 20px;
     }
@@ -52,35 +55,36 @@ class{
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Publisher)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Datetime)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datetime)
+                </td>
+                <td>
                     <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" style="width:240px;" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-lg btn-success">Edit</a> <br><br>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-lg btn-warning">Details</a> <br><br>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-lg btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
