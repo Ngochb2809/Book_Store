@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "ListCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    td, th {
+        padding: 10px;
+    }
+</style>
+<script src="~/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".updateCart").click(function (event) {
+            event.preventDefault();
+            var quantity = $(".quantity_" + $(this).attr("data-id")).val();
+            console.log(quantity);
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("updateCart","Cart")",
+                data: {
+                    id: $(this).attr("data-id"),
+                    quantity: quantity
+                },
+                success: function (result) {
+                    window.location.href = '@Url.Action("ListCart","Cart")';
+                }
+            });
+        });
+    });
+</script>
+<div class="list-cart">
+    <table class="cart" border="1">
+        <tr>
+            <th>STT</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        @{
+            int STT = 0;
+            foreach (var item in ViewBag.carts)
+            {
+                string txt_class = "quantity_" + item.Book.Id;
+                STT++;
+                
+                decimal total = item.Book.Price * item.Quantity;
+                //caloriesBurned = Convert.ToInt32(Decimal.Multiply(maleusage, textBoxInt));
+                <tr>
+                    <td>@STT</td>
+                    <td>@item.Book.Name</td>
+                    <td><img src="@item.Book.ImageUrl" width="300" height="200" /></td>
+                    <td><input type="number" class="@txt_class" value="@item.Quantity" /></td>
+                    <td>@item.Book.Price</td>
+                    <td>@total</td>
+                    <td><a href="" data-id="@item.Book.Id" class="updateCart">Update</a></td>
+                    <td><a asp-controller="Cart" asp-action="deleteCart" asp-route-id="@item.Book.Id">Delete</a></td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+
