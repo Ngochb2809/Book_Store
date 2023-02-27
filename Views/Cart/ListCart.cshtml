@@ -7,8 +7,8 @@
         padding: 10px;
     }
 </style>
-<script src="~/js/jquery.min.js"></script>
-<script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
     $(document).ready(function () {
         $(".updateCart").click(function (event) {
             event.preventDefault();
@@ -36,9 +36,10 @@
             <th>Image</th>
             <th>Quantity</th>
             <th>Price</th>
-            <th>Total Price</th>
+            
             <th>Update</th>
             <th>Delete</th>
+            <th>Total Price</th>
         </tr>
         @{
             int STT = 0;
@@ -55,9 +56,11 @@
                     <td><img src="@item.Book.ImageUrl" width="300" height="200" /></td>
                     <td><input type="number" class="@txt_class" value="@item.Quantity" /></td>
                     <td>@item.Book.Price</td>
-                    <td>@total</td>
-                    <td><a href="" data-id="@item.Book.Id" class="updateCart">Update</a></td>
-                    <td><a asp-controller="Cart" asp-action="deleteCart" asp-route-id="@item.Book.Id">Delete</a></td>
+                    
+                    <td><a href="" data-id="@item.Book.Id" class="updateCart btn btn-outline-dark btn-lg px-5" >Update</a></td>
+                    <td><a class="btn btn-outline-dark btn-lg px-5" asp-controller="Cart" asp-action="deleteCart" asp-route-id="@item.Book.Id">Delete</a></td>
+
+                    <td align="center">@total <br><a class="btn btn-outline-dark btn-lg px-5">Purchase</a></td>
                 </tr>
             }
         }
