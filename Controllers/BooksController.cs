@@ -25,7 +25,7 @@ namespace Book_Store.Controllers
         {
               return View(await _context.Book.ToListAsync());
         }
-        [Authorize(Roles = "Admin")]
+        
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -55,7 +55,7 @@ dt{
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageUrl)
+            <img src="@Html.DisplayFor(modelItem => modelItem.ImageUrl)" style="width:240px;" />
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
@@ -66,6 +66,13 @@ dt{
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a> |
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
+        
+    }
+     
+    
+    <a class="btn btn-secondary" asp-area="" asp-controller="Cart" asp-action="Index">Back to List</a>
 </div>

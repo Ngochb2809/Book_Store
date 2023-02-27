@@ -15,25 +15,25 @@ namespace Book_Store.Controllers
         {
             this._db = db;
         }
-        [Authorize(Roles = "User")]
+        [Authorize]
         public IActionResult Index()
         {
             var _book = getAllBook();
             ViewBag.book = _book;
             return View();
         }
-        [Authorize(Roles = "User")]
+        
         public List<Book> getAllBook()
         {
             return _db.Book.ToList();
         }
-        [Authorize(Roles = "User")]
+        
         public Book getDetailBook(int id)
         {
             var book = _db.Book.Find(id);
             return book;
         }
-        [Authorize(Roles = "User")]
+        
         public IActionResult addCart(int id)
         {
             var cart = HttpContext.Session.GetString("cart");//get key cart
@@ -79,7 +79,7 @@ namespace Book_Store.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-        [Authorize(Roles = "User")]
+        [Authorize]
         public IActionResult ListCart()
         {
             var cart = HttpContext.Session.GetString("cart");//get key cart
@@ -94,7 +94,7 @@ namespace Book_Store.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        [Authorize(Roles = "User")]
+        
         [HttpPost]
         public IActionResult updateCart(int id, int quantity)
         {
@@ -121,7 +121,7 @@ namespace Book_Store.Controllers
             return BadRequest();
 
         }
-        [Authorize(Roles = "User")]
+        
         public IActionResult deleteCart(int id)
         {
             var cart = HttpContext.Session.GetString("cart");
