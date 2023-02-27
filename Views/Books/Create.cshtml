@@ -46,20 +46,16 @@
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
+            </div> <br />
             <div class="form-group">
-<<<<<<< Updated upstream
-                <input type="submit" value="Create" class="btn btn-primary" />
-=======
                 <input type="submit" value="Create" class="btn btn-primary" /> | <a class="btn btn-secondary" asp-area="" asp-controller="Cart" asp-action="Index">Back to List</a>
->>>>>>> Stashed changes
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    
 </div>
 
 @section Scripts {
