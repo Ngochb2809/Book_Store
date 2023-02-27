@@ -30,6 +30,14 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Book_Store.styles.css" asp-append-version="true" />
 </head>
+<style>
+    img.cart {
+        width: 90px !important;
+        height: 75px;
+        display: inline-block;
+    }
+</style>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -47,15 +55,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+<<<<<<< Updated upstream
+=======
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Book</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Order</a>
+                            </li>
+                        }
+                        
+                        
+                        
+>>>>>>> Stashed changes
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+        
+            
+        
+        
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
             <br />
+<<<<<<< Updated upstream
  
         <a asp-area=""
             asp-controller="Cart"
@@ -67,18 +99,16 @@
  
         <br />
 
+=======
+            
+
+            <br />
+>>>>>>> Stashed changes
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Book_Store - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
