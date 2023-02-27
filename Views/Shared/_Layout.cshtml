@@ -55,8 +55,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-<<<<<<< Updated upstream
-=======
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
@@ -69,10 +67,6 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Order</a>
                             </li>
                         }
-                        
-                        
-                        
->>>>>>> Stashed changes
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -87,7 +81,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             <br />
-<<<<<<< Updated upstream
+
  
         <a asp-area=""
             asp-controller="Cart"
@@ -98,17 +92,13 @@
          </a>
  
         <br />
-
-=======
             
 
             <br />
->>>>>>> Stashed changes
+
             @RenderBody()
         </main>
     </div>
-
-    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
