@@ -20,6 +20,8 @@
 }
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,8 +57,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-<<<<<<< Updated upstream
-=======
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
@@ -72,7 +72,6 @@
                         
                         
                         
->>>>>>> Stashed changes
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -87,23 +86,9 @@
     <div class="container">
         <main role="main" class="pb-3">
             <br />
-<<<<<<< Updated upstream
- 
-        <a asp-area=""
-            asp-controller="Cart"
-            asp-action="ListCart"
-            style="background:red;padding:10px;">Cart
-            <img src="~/images/cart.png" style="width:25px !important;height:25px;display:inline-block;" />
-            @coutCart
-         </a>
- 
-        <br />
-
-=======
             
 
             <br />
->>>>>>> Stashed changes
             @RenderBody()
         </main>
     </div>

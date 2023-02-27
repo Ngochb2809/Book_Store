@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Book_Store.Data;
 using Book_Store.Models;
-using Book_Store.Data;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 
 namespace Book_Store.Controllers
@@ -11,7 +11,7 @@ namespace Book_Store.Controllers
     {
         private ApplicationDbContext _db;
         // GET: Shop
-        public CartController(ApplicationDbContext db) 
+        public CartController(ApplicationDbContext db)
         {
             this._db = db;
         }

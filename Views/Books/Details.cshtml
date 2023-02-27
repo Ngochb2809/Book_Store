@@ -5,6 +5,17 @@
 }
 
 <h1>Details</h1>
+<style>
+    dl{
+    border:1px solid black;
+}
+dt{
+    border:1px solid black;
+}
+đ{
+    border:1px solid black;
+}
+</style>
 
 <div>
     <h4>Book</h4>
@@ -55,10 +66,6 @@
     </dl>
 </div>
 <div>
-<<<<<<< Updated upstream
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-=======
     @if (User.IsInRole("Admin"))
     {
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a>
@@ -68,5 +75,4 @@
      
     
     <a class="btn btn-secondary" asp-area="" asp-controller="Cart" asp-action="Index">Back to List</a>
->>>>>>> Stashed changes
 </div>
