@@ -167,7 +167,20 @@ namespace Book_Store.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> OrderDetails(int? id)
+        {
+            if (id == null || _context.Order == null)
+            {
+                return NotFound();
+            }
+            var order = _context.Set<Order>().Include(o => o.Book).FirstOrDefault(m => m.Id == id);
 
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return View(order);
+        }
         private bool OrderExists(int id)
         {
           return _context.Order.Any(e => e.Id == id);

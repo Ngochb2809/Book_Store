@@ -73,8 +73,15 @@
                     <td><a href="" data-id="@item.Book.Id" class="updateCart btn btn-outline-dark btn-lg px-5" >Update</a></td>
                     <td><a class="btn btn-outline-dark btn-lg px-5" asp-controller="Cart" asp-action="deleteCart" asp-route-id="@item.Book.Id">Delete</a></td>
 
-                    <td align="center">@total <br><a class="btn btn-outline-dark btn-lg px-5">Purchase</a></td>
+                    <td align="center">@total</td>
                 </tr>
+                @using (Html.BeginForm("CheckOut", "Cart", FormMethod.Post))
+                {
+                    <div class="col-md-3 col-lg-3 col-xl-2">
+                        <button type="submit"  class="btn btn-primary"><h6 class="mb-0">Checkout</h6></button>
+                    </div>
+                }
+
             }
         }
 

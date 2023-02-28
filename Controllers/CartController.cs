@@ -1,19 +1,28 @@
 ﻿using Book_Store.Data;
 using Book_Store.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.PowerBI.Api.Models;
 using Newtonsoft.Json;
 using System.Data;
+using System.Security.Claims;
+
 
 namespace Book_Store.Controllers
 {
     public class CartController : Controller
     {
         private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+
         // GET: Shop
-        public CartController(ApplicationDbContext db)
+        public CartController(ApplicationDbContext db, ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             this._db = db;
+            this._context = context;
+            this._userManager = userManager;
         }
         [Authorize]
         public IActionResult Index()
@@ -141,6 +150,44 @@ namespace Book_Store.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        public async Task<ActionResult> CheckOut()
+        {
+            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userid); 
+            if (user == null)
+            {
+                return RedirectToPage("./Login");
+            }
+            if (ModelState.IsValid)
+            {
+                var cart = HttpContext.Session.GetString("cart");
+                if (cart != null)
+                {
+                    List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
 
+                    for (int i = 0; i < dataCart.Count; i++)
+                    {
+                        Order order = new Order()
+                        {
+                            //UserId = await _userManager.GetUserId(userid),
+                            UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                            BookId = dataCart[i].Book.Id,
+                            Qty = dataCart[i].Quantity,
+                            Price = Convert.ToDouble(dataCart[i].Quantity * dataCart[i].Book.Price),
+                            Phone = "0"
+
+                        };
+                        _context.Order.Add(order);
+                        _context.SaveChanges();
+                        deleteCart(dataCart[i].Book.Id);
+
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
+
 }
+    

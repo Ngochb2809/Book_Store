@@ -1,77 +1,32 @@
-﻿@model IEnumerable<Book_Store.Models.Order>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
+﻿@model Book_Store.Models.Order
 <h1>Order List</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-
-<style>
-    table {
-        border: 1px solid black;
-    }
-
-    th {
-        border: 1px solid black;
-    }
-
-    td {
-        border: 1px solid black;
-    }
-
-    class {
-        text-align: center;
-    }
-</style>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Qty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
+@{
+    ViewData["Title"] = "OrderDetails";
 }
-    </tbody>
-</table>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>OrderDetail</title>
+</head>
+<body>
+<div class="col-sm-6">
+    <ul class="list-unstyled mb-0">
+        <li>@Html.DisplayNameFor(model => model.Price)</li>
+        <li>@Html.DisplayNameFor(model => model.Book)</li>
+    </ul>
+</div>
+
+<div class="col-sm-6">
+    <ul class="list-unstyled mb-0">
+        <li>@Html.DisplayFor(model => model.Price)</li>
+        <li>@Html.DisplayFor(model => model.Book.Name)</li>
+    </ul>
+</div>
+
+</body>
+</html>
