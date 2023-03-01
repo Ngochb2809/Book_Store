@@ -3,6 +3,7 @@ using Book_Store.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.PowerBI.Api.Models;
 using Newtonsoft.Json;
 using System.Data;
@@ -15,10 +16,10 @@ namespace Book_Store.Controllers
     {
         private ApplicationDbContext _db;
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         // GET: Shop
-        public CartController(ApplicationDbContext db, ApplicationDbContext context, UserManager<AppUser> userManager)
+        public CartController(ApplicationDbContext db, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             this._db = db;
             this._context = context;
@@ -152,8 +153,8 @@ namespace Book_Store.Controllers
         }
         public async Task<ActionResult> CheckOut()
         {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userid); 
+            
+            var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return RedirectToPage("./Login");
@@ -161,6 +162,11 @@ namespace Book_Store.Controllers
             if (ModelState.IsValid)
             {
                 var cart = HttpContext.Session.GetString("cart");
+                //int count = 0;
+                //if (count == null)
+                //{
+                //    count = _context.Order.Max(m => m.Count); ;
+                //}
                 if (cart != null)
                 {
                     List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
@@ -169,8 +175,7 @@ namespace Book_Store.Controllers
                     {
                         Order order = new Order()
                         {
-                            //UserId = await _userManager.GetUserId(userid),
-                            UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                            UserId = user.Id,
                             BookId = dataCart[i].Book.Id,
                             Qty = dataCart[i].Quantity,
                             Price = Convert.ToDouble(dataCart[i].Quantity * dataCart[i].Book.Price),
@@ -186,6 +191,38 @@ namespace Book_Store.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> OrderList(int? id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var orders = _context.Order.Where(o => o.UserId == userId);
+
+            if (User.IsInRole("Admin"))
+            {
+                orders = _context.Order;
+            }
+
+            var applicationDbContext = orders.Include(o => o.Book);
+
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> OrderDetails(int? id)
+        {
+            if (id == null || _context.Order == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order
+                .Include(o => o.Book)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
     }
 

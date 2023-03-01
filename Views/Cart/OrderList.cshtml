@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Book_Store.Models.Order>
+
+@{
+    ViewData["Title"] = "OrderList";
+
+}
+
+<h2>Order</h2>
+
+@if (!Model.Any())
+{
+    <p>Your order is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Orders" asp-route-id="@item.Id" class="btn">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

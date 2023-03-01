@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model Book_Store.Models.Order
+
+@{
+    ViewData["Title"] = "OrderDetails";
+    var currentUser = await UserManager.GetUserAsync(User);
+    var isAdmin = await UserManager.IsInRoleAsync(currentUser, "Admin");
+
+}
+
+
+@if (isAdmin)
+{
+    <div>
+        <h4>Order Detail</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Book:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.Name)
+            </dd>
+            <dt class="col-sm-2">Price:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-2">Quantity:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Qty)
+            </dd>
+            <dt class="col-sm-2">UserID:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn">Back to List</a>
+    </div>
+}
+else
+{
+
+    <div>
+        <h4>Order Detail</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Book:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.Name)
+            </dd>
+            <dt class="col-sm-2">Price:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-2">Quantity:</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Qty)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn">Back to List</a>
+    </div>
+}
