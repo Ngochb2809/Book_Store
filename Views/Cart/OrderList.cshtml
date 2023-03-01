@@ -1,10 +1,32 @@
-﻿@model IEnumerable<Book_Store.Models.Order>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
+
+@model IEnumerable<Book_Store.Models.Order>
+@*@model Book_Store.Models.Order>*@
 @{
-    ViewData["Title"] = "OrderList";
+    //ViewData["Title"] = "OrderList";
+    ViewData["Title"] = "OrderDetails";
+    var currentUser = await UserManager.GetUserAsync(User);
+    var isAdmin = await UserManager.IsInRoleAsync(currentUser, "Admin");
 
 }
-
+<style>
+    table{
+    border:1px solid black;
+}
+th{
+    border:1px solid black;
+}
+td{
+    border:1px solid black;
+}
+class{
+        height: 20px;
+        width: 20px;
+    }
+</style>
 <h2>Order</h2>
 
 @if (!Model.Any())
@@ -15,24 +37,112 @@ else
 {
     <table class="table">
         <thead>
-            <tr>
-                <th>Book</th>
-                <th></th>
-            </tr>
+            @if (isAdmin)
+            {
+                <tr>
+                    <th>
+                   Book Name
+                    </th>
+                <th>
+                   Book Price
+                </th>
+                <th>
+                   Book Quantity
+                </th>
+                <th>
+                       User Id
+                    </th>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th>
+                        Book Name
+                    </th>
+                    <th>
+                        Book Price
+                    </th>
+                    <th>
+                        Book Quantity
+                    </th>
+
+                </tr>
+            }
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Book.Name)
-                    </td>
-                    <td>
-                        <a asp-controller="Cart" asp-action="Orders" asp-route-id="@item.Id" class="btn">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn">Delete</a>
-                    </td>
-                </tr>
-            }
+                @if (isAdmin)
+                {
+                 
+                    @*<dl class="row">
+                        <dt class="col-sm-2">Book:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Book.Name)
+                        </dd>
+                        <dt class="col-sm-2">Price:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </dd>
+                        <dt class="col-sm-2">Quantity:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Qty)
+                        </dd>
+                        <dt class="col-sm-2">UserID:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </dd>
+                    </dl>*@
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Book.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @*<dl class="row">
+                        <dt class="col-sm-2">Book:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Book.Name)
+                        </dd>
+                        <dt class="col-sm-2">Price:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </dd>
+                        <dt class="col-sm-2">Quantity:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Qty)
+                        </dd>
+                        <dt class="col-sm-2">UserID:</dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </dd>
+                    </dl>*@
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Book.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qty)
+                        </td>
+                    </tr>
+                }
+
+        }
         </tbody>
     </table>
 }

@@ -6,8 +6,11 @@
     <h1 class="display-4">Welcome to Book Store</h1>
     @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
     <br /><br /><br /><br />
-    
-    <a class="btn btn-outline-dark btn-lg px-5" asp-area="" asp-controller="Cart" asp-action="Index">Go to book purchase page --></a>
+    @if (User.IsInRole("User"))
+    {
+        <a class="btn btn-outline-dark btn-lg px-5" asp-area="" asp-controller="Cart" asp-action="Index">Go to book purchase page --></a>
+    }
+    @*<a class="btn btn-outline-dark btn-lg px-5" asp-area="" asp-controller="Cart" asp-action="Index">Go to book purchase page --></a>*@
 </div>
 
 
