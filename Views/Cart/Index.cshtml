@@ -642,6 +642,14 @@
 
 <div class="row">
 <div class="col-sm-6 col-md-4">
+       @* <li class="nav-item">
+            <form asp-controller="Cart" asp-action="Index" class="nav-link">
+                <p style="margin:0;">
+                    <input type="text" name="search" placeholder="">
+                    <input type="submit" value="Search">
+                </p>
+            </form>
+        </li>*@
     @foreach (var item in ViewBag.book)
     {
 
@@ -671,6 +679,7 @@
 
             </div> <br>
     }
+   
 
 
 </div>

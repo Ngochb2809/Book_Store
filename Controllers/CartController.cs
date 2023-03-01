@@ -3,6 +3,7 @@ using Book_Store.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.PowerBI.Api.Models;
 using Newtonsoft.Json;
@@ -26,13 +27,25 @@ namespace Book_Store.Controllers
             this._userManager = userManager;
         }
         [Authorize]
+        //public async Task<IActionResult> Index(string search)
+        //{
+
+        //    var books = from m in _context.Book select m;
+        //    if (!string.IsNullOrEmpty(search))
+        //    {
+        //        books = books.Where(s => s.Name.Contains(search));
+        //    }
+        //    /*var _book = getAllBook();
+        //    ViewBag.book = _book;*/
+        //    return View(await books.ToListAsync());
+        //}
         public IActionResult Index()
         {
             var _book = getAllBook();
             ViewBag.book = _book;
             return View();
         }
-        
+
         public List<Book> getAllBook()
         {
             return _db.Book.ToList();
@@ -224,6 +237,7 @@ namespace Book_Store.Controllers
 
             return View(order);
         }
+       
     }
 
 }
