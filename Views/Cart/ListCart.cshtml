@@ -54,14 +54,18 @@
             <th>Delete</th>
             <th>Total Price</th>
         </tr>
+        
         @{
             int STT = 0;
+            decimal sum = 0;
             foreach (var item in ViewBag.carts)
             {
                 string txt_class = "quantity_" + item.Book.Id;
                 STT++;
 
                 decimal total = item.Book.Price * item.Quantity;
+                //double sum = 0;
+                sum += total;
                 //caloriesBurned = Convert.ToInt32(Decimal.Multiply(maleusage, textBoxInt));
                 <tr>
                     <td>@STT</td>
@@ -75,14 +79,21 @@
 
                     <td align="center">@total</td>
                 </tr>
+
+
+            }
+            <tr>
+                <div class="d-flex justify-content-between mb-5">
+                    <h5 class="text-uppercase">Total price</h5>
+                    <h5>$ @sum</h5>
+                </div>
                 @using (Html.BeginForm("CheckOut", "Cart", FormMethod.Post))
                 {
                     <div class="col-md-3 col-lg-3 col-xl-2">
                         <button type="submit"  class="btn btn-primary"><h6 class="mb-0">Checkout</h6></button>
                     </div>
                 }
-
-            }
+                </tr>
         }
 
     </table>
